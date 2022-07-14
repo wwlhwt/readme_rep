@@ -1,0 +1,17 @@
+#mainContent{
+	width: auto;
+}
+#sideBar{
+	display: none;
+}
+#comment_form{
+	display: none;
+}
+#blog_post_info
+{
+	display: none;
+}
+.postDesc
+{
+	display: none;
+}
