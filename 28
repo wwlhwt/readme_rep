@@ -40,4 +40,51 @@ https://github.com/vvmcat/Github-SpeedUpTool
 https://blog.csdn.net/xp5xp6/article/details/50527474?readlog
 https://blog.csdn.net/xp5xp6/article/details/50527474?locationNum=8&fps=1
 https://blog.51cto.com/u_8081755/3353371------------------------这篇写的不错
+###################################################example##########################################################
+eg.3310.
+###################################################start##########################################################
+enum
+{
+    MSG_LVL_NONE,
+    MSG_LVL_ERR,
+    MSG_LVL_WARN,
+    MSG_LVL_INFO,
+    MSG_LVL_DBG,
+};
+
+//#define MSG_LVL MSG_LVL_WARN	//default
+#define MSG_LVL MSG_LVL_DBG
+
+#define SYS_ERR "-E-: "
+#define SYS_WARN "-W-: "
+#define SYS_INFO "-I-: "
+#define SYS_DBG "-D-: "
+
+//#define PRINTF(...) msg_printf("[%s] : %d\n",  __FUNCTION__, __LINE__)
+#define PRINTF(...) do {} while(0)
+#define MSG(...)    do {} while(0)
+
+
+//#define PRINTF(...) msg_printf(__VA_ARGS__)
+//#define MSG(...)    msg_printf(__VA_ARGS__)
+#define printf(...) msg_printf(__VA_ARGS__)
+#define MSG_WARN(...) (MSG_LVL < MSG_LVL_WARN) ? (void)0 : msg_printf(SYS_WARN __VA_ARGS__)
+#define MSG_INFO(...) (MSG_LVL < MSG_LVL_INFO) ? (void)0 : msg_printf(SYS_INFO __VA_ARGS__)
+#define MSG_DBG(...) (MSG_LVL < MSG_LVL_DBG) ? (void)0 : msg_printf(SYS_DBG __VA_ARGS__)
+#define MSG_ERR(...) (MSG_LVL < MSG_LVL_DBG) ? (void)0 : msg_printf(SYS_ERR __VA_ARGS__)
+###################################################end##########################################################
+void msg_printf(char *fmt, ...);
+void msg_printf (char * fmt, ... )
+{
+    va_list args;
+//    int n;
+
+    char printbuffer[256];
+    va_start ( args, fmt );
+//    n = vsprintf ( printbuffer, fmt, args );
+    vsprintf ( printbuffer, fmt, args );
+    va_end ( args );
+
+    sci_puts_dev((UINT8 *)printbuffer);
+}
 
